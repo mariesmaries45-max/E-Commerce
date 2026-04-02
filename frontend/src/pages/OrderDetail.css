@@ -1,0 +1,137 @@
+/* Page */
+.order-detail-page {
+  padding: 20px;
+  background: #f8f9fa;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+/* Layout */
+.order-detail-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+/* Cards */
+.order-info,
+.order-items-section,
+.order-address,
+.order-summary {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Header */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Status */
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 12px;
+}
+
+.pending { background: orange; }
+.paid { background: #007bff; }
+.delivered { background: green; }
+
+/* Meta */
+.order-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+/* Items */
+.order-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+}
+
+.order-item img {
+  width: 60px;
+  margin-right: 10px;
+}
+
+.item-price {
+  margin-left: auto;
+  font-weight: bold;
+}
+
+/* ===================== */
+/* SUMMARY SECTION */
+/* ===================== */
+
+.summary-row,
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0;
+  gap: 20px; /* 🔥 spacing between label & amount */
+}
+
+/* Right side alignment like FREE */
+.summary-row span:last-child,
+.total-row span:last-child {
+  min-width: 130px;
+  text-align: right;
+}
+
+/* Total styling */
+.total-row {
+  border-top: 2px solid #eee;
+  padding-top: 12px;
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  
+}
+
+.total-row span:last-child {
+  color: #2e7d32;
+}
+
+/* Back Button */
+.back-to-cart {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.back-to-cart:hover {
+  background: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .order-detail-container {
+    grid-template-columns: 1fr;
+  }
+}
