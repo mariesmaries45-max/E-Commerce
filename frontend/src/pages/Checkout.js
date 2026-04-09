@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import axios from 'axios';
 import Spinner from '../components/Spinner';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 import './Checkout.css';
 
 const Checkout = () => {
@@ -10,13 +12,14 @@ const Checkout = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [orderCreated, setOrderCreated] = useState(false);
+
   const [formData, setFormData] = useState({
     address: '',
     city: '',
     postalCode: '',
     country: '',
     phone: '',
-    paymentMethod: 'cod', // cod = Cash on Delivery
+    paymentMethod: 'cod',
   });
 
   const { address, city, postalCode, country, phone, paymentMethod } = formData;
@@ -39,7 +42,7 @@ const Checkout = () => {
       const shippingPrice = getCartTotal() > 1000 ? 0 : 99;
       const totalPrice = getCartTotal() + taxPrice + shippingPrice;
 
-      const { data } = await axios.post(
+      await axios.post(
         '/api/orders',
         {
           orderItems,
@@ -65,6 +68,7 @@ const Checkout = () => {
       clearCart();
       setOrderCreated(true);
       localStorage.removeItem('cart');
+
     } catch (error) {
       alert(error.response?.data?.message || 'Something went wrong');
     } finally {
@@ -86,7 +90,7 @@ const Checkout = () => {
         <div className="success-content">
           <div className="success-icon">✓</div>
           <h2>Order Placed Successfully!</h2>
-          <p>Thank you for your order. We'll send you a confirmation email shortly.</p>
+          <p>Thank you for your order.</p>
           <Link to="/orders" className="btn btn-primary">
             View Orders
           </Link>
@@ -99,13 +103,14 @@ const Checkout = () => {
     <div className="checkout-page">
       <div className="checkout-header">
         <h1>Checkout</h1>
-        <p>Review your order and complete payment</p>
       </div>
 
       <div className="checkout-container">
         <div className="checkout-form">
           <h3>Shipping Address</h3>
+
           <form onSubmit={handleSubmit}>
+            {/* Address */}
             <div className="form-group">
               <label>Full Address</label>
               <input
@@ -113,10 +118,11 @@ const Checkout = () => {
                 name="address"
                 value={address}
                 onChange={handleChange}
-                placeholder="House number, street, locality"
                 required
               />
             </div>
+
+            {/* City + Pincode */}
             <div className="form-row">
               <div className="form-group">
                 <label>City</label>
@@ -125,9 +131,53 @@ const Checkout = () => {
                   name="city"
                   value={city}
                   onChange={handleChange}
+                  list="tn-districts"
+                  placeholder="Select district"
                   required
                 />
+                <datalist id="tn-districts">
+                  <option value="Ariyalur" />
+                  <option value="Chengalpattu" />
+                  <option value="Chennai" />
+                  <option value="Coimbatore" />
+                  <option value="Cuddalore" />
+                  <option value="Dharmapuri" />
+                  <option value="Dindigul" />
+                  <option value="Erode" />
+                  <option value="Kallakurichi" />
+                  <option value="Kanchipuram" />
+                  <option value="Kanyakumari" />
+                  <option value="Karur" />
+                  <option value="Krishnagiri" />
+                  <option value="Madurai" />
+                  <option value="Mayiladuthurai" />
+                  <option value="Nagapattinam" />
+                  <option value="Namakkal" />
+                  <option value="Nilgiris" />
+                  <option value="Perambalur" />
+                  <option value="Pudukkottai" />
+                  <option value="Ramanathapuram" />
+                  <option value="Ranipet" />
+                  <option value="Salem" />
+                  <option value="Sivaganga" />
+                  <option value="Tenkasi" />
+                  <option value="Thanjavur" />
+                  <option value="Theni" />
+                  <option value="Thoothukudi" />
+                  <option value="Tiruchirappalli" />
+                  <option value="Tirunelveli" />
+                  <option value="Tirupathur" />
+                  <option value="Tiruppur" />
+                  <option value="Tiruvallur" />
+                  <option value="Tiruvannamalai" />
+                  <option value="Tiruvarur" />
+                  <option value="Vellore" />
+                  <option value="Viluppuram" />
+                  <option value="Virudhunagar" />
+
+                </datalist>
               </div>
+
               <div className="form-group">
                 <label>Postal Code</label>
                 <input
@@ -139,6 +189,8 @@ const Checkout = () => {
                 />
               </div>
             </div>
+
+            {/* Country */}
             <div className="form-group">
               <label>Country</label>
               <input
@@ -146,25 +198,72 @@ const Checkout = () => {
                 name="country"
                 value={country}
                 onChange={handleChange}
-                placeholder="India"
+                list="countries"
+                placeholder="Select Country"
                 required
               />
+              <datalist id="countries">
+                <option value="India" />
+                <option value="United States" />
+                <option value="United Kingdom" />
+                <option value="Canada" />
+                <option value="Australia" />
+                <option value="Germany" />
+                <option value="France" />
+                <option value="Italy" />
+                <option value="Spain" />
+                <option value="Brazil" />
+                <option value="China" />
+                <option value="Japan" />
+                <option value="South Korea" />
+                <option value="Singapore" />
+                <option value="Malaysia" />
+                <option value="Thailand" />
+                <option value="UAE" />
+                <option value="Saudi Arabia" />
+                <option value="South Africa" />
+                <option value="New Zealand" />
+                <option value="Netherlands" />
+                <option value="Switzerland" />
+                <option value="Sweden" />
+                <option value="Norway" />
+                <option value="Denmark" />
+                <option value="Finland" />
+                <option value="Russia" />
+                <option value="Mexico" />
+                <option value="Indonesia" />
+                <option value="Philippines" />
+                <option value="Vietnam" />
+                <option value="Turkey" />
+                <option value="Argentina" />
+                <option value="Pakistan" />
+                <option value="Bangladesh" />
+                <option value="Sri Lanka" />
+                <option value="Nepal" />
+              </datalist>
             </div>
+
+            {/* Phone with flags */}
             <div className="form-group">
               <label>Phone Number</label>
-              <input
-                type="tel"
-                name="phone"
+              <PhoneInput
+                country={'in'}
                 value={phone}
-                onChange={handleChange}
-                placeholder="+91 1234567890"
-                required
+                onChange={(phone) =>
+                  setFormData({ ...formData, phone })
+                }
+                inputStyle={{ width: '100%' }}
+                enableSearch={true}
               />
             </div>
 
+            {/* Payment */}
             <h3>Payment Method</h3>
+
             <div className="payment-methods">
-              <label className="payment-method">
+
+              {/* COD */}
+              <label className={`payment-method ${paymentMethod === 'cod' ? 'active' : ''}`}>
                 <input
                   type="radio"
                   name="paymentMethod"
@@ -177,30 +276,43 @@ const Checkout = () => {
                   <p>Pay when your order is delivered</p>
                 </div>
               </label>
-              <label className="payment-method">
+             {/* Card Payment */}
+              <label className={`payment-method ${paymentMethod === 'card' ? 'active' : ''}`}>
                 <input
                   type="radio"
                   name="paymentMethod"
                   value="card"
+                  checked={paymentMethod === 'card'}
                   onChange={handleChange}
                 />
                 <div>
-                  <span className="method-title">Credit/Debit Card</span>
+                  <span className="method-title">Credit / Debit Card</span>
                   <p>Pay securely with card</p>
                 </div>
               </label>
+
             </div>
 
+            {/* Card Form */}
+            {paymentMethod === 'card' && (
+              <div className="card-form">
+                <input type="text" placeholder="Card Number" required />
+                <input type="text" placeholder="MM/YY" required />
+                <input type="text" placeholder="CVV" required />
+              </div>
+            )}
+
+            {/* Button */}
             <button
               type="submit"
               className="place-order-btn"
               disabled={loading || cartItems.length === 0}
             >
-              {loading ? <Spinner /> : 'Place Order'}
+              {loading ? "Processing..." : "Place Order"}
             </button>
           </form>
         </div>
-
+        {/* Order Summary */}
         <div className="order-summary">
           <h3>Order Summary</h3>
           <div className="summary-items">

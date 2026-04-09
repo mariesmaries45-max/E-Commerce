@@ -45,24 +45,37 @@ const Orders = () => {
   }
 
   return (
-    <div className="orders-page">
-      <div className="page-header">
-        <h1>My Orders</h1>
-        <p>{orders.length} total orders</p>
-      </div>
+   <div className="orders-page">
+  <div className="page-header">
+    <h1>My Orders</h1>
+    <p>{orders.length} total orders</p>
+  </div>
 
-      {orders.length === 0 ? (
-        <div className="empty-orders">
-          <div className="empty-content">
-            <span className="empty-icon">📦</span>
-            <h3>No orders yet</h3>
-            <p>Start shopping to place your first order!</p>
-            <Link to="/products" className="btn btn-primary">
-              Start Shopping
-            </Link>
-          </div>
+  {orders.length === 0 ? (
+    <div className="empty-orders">
+      <div className="empty-content">
+        <span className="empty-icon">📦</span>
+        <h3>No orders yet</h3>
+        <p>Start shopping to place your first order!</p>
+        <Link to="/products" className="btn btn-primary">
+          Start Shopping
+        </Link>
+      </div>
+    </div>
+  ) : (
+    <div className="orders-list">
+      {orders.map((order) => (
+        <div key={order._id} className="order-card">
+          <h3>Order #{order._id}</h3>
+          <p>Total: ₹{order.totalPrice}</p>
+          <Link to={`/order/${order._id}`} className="btn btn-secondary">
+            View Details
+          </Link>
         </div>
-      ) : (
+      ))}
+    </div>
+  )}
+       
         <div className="orders-grid">
           {orders.map((order) => (
             <Link key={order._id} to={`/order/${order._id}`} className="order-card">
@@ -88,7 +101,7 @@ const Orders = () => {
             </Link>
           ))}
         </div>
-      )}
+      
     </div>
   );
 };

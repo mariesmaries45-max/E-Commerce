@@ -1,14 +1,90 @@
-.orders {
+.orders-page {
   padding: 20px;
+  background: #f9fafb;
+  min-height: 100vh;
 }
 
-.orders h2 {
-  margin-bottom: 15px;
+.page-header {
+  margin-bottom: 20px;
 }
 
+.page-header h1 {
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.page-header p {
+  color: #666;
+}
+
+/* Grid Layout */
+.orders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* Card */
 .order-card {
-  border: 1px solid #ddd;
-  padding: 10px;
+  display: block;
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Header */
+.order-header {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 10px;
-  border-radius: 5px;
+}
+
+.order-id {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Status badges */
+.order-status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.order-status.delivered {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.order-status.paid {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.order-status.pending {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Content */
+.order-date,
+.order-items,
+.order-total {
+  font-size: 14px;
+  margin: 6px 0;
+}
+
+.order-total {
+  font-weight: bold;
+  font-size: 16px;
 }
