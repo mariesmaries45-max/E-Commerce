@@ -29,16 +29,20 @@ const Footer = () => {
           <h4 className="footer-heading">Categories</h4>
           <ul className="footer-links">
             <li><Link to="/products">All Mobiles</Link></li>
-            <li><Link to="/products">Apple</Link></li>
-            <li><Link to="/products">Samsung</Link></li>
-            <li><Link to="/products">OnePlus</Link></li>
+            <li><Link to="/products/apple">Apple</Link></li>
+            <li><Link to="/products/samsung">Samsung</Link></li>
+            <li><Link to="/products/oneplus">OnePlus</Link></li>
           </ul>
         </div>
 
         <div className="footer-section">
           <h4 className="footer-heading">Contact Us</h4>
           <ul className="footer-contact">
-            <li>📧 marieswaran@gmail.com</li>
+            <li>
+              📧 <a href="mailto:mariesmaries45@gmail.com">
+                mariesmaries45@gmail.com
+              </a>
+            </li>
             <li>📞 +91 8610172710</li>
             <li>📍 sivakasi, Tamilnadu</li>
           </ul>
